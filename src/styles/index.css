@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+.parent {
+  padding: 10px;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+.navigation ul{
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  gap: 15px;
+  font-size: 15px;
+  list-style-type: none;
+}
+.home {
+  font-size: 1em;
+  margin-top: 30px;
+  text-align: center;
+}
+.home h1{
+  font-size: 1.5em;
+}
+.home p {
+  font-weight: 500;
+  font-size: 1em;
+  text-transform: uppercase;
+}
+
+.card {
+  width: 50%;
+  margin: 10px auto;
+  padding: 10px;
+  text-align: justify;
+}
+.card section {
+  width: fit-content;
+  margin: 10px auto;
+  gap: 20px;
+  display: flex;
+}
+button {
+  font-family: inherit;
+  font-size: 16px;
+  padding: 5px 20px;
+  margin-right: 10px;
+  color: inherit;
+}
