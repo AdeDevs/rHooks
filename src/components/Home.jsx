@@ -75,11 +75,12 @@ export default function HomePage() {
                         <input type="text" value={searchTerm} onChange={(e) => { setSearchTerm(e.target.value) }} placeholder="Enter your search" />
                         <ul>{exactMatch.map((character) => <li key={character}>{character}</li>)}</ul>
                         <button onClick={handleSearch}>Search</button>
-                        <ul>
+                        {/* <ul>
                             {characters.map((character) => <li key={character}>{character}</li>)}
-                        </ul>
+                        </ul> */}
                         <input type="text" placeholder="search items" value={searchItem} onChange={(e) => setSearchItem(e.target.value)} />
                         <ul>
+                            <p>categories include: women's clothing, men's clothing, electronics</p>
                         {filterItems.map((item) => (
                             <li key={item.id}>{item.title}</li>
                         ))}

@@ -77,13 +77,19 @@ button {
 ul {
   width: 50%;
   border: 1px solid red;
-  list-style-type: disc;
+  list-style-type: none;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 10px;
   font-weight: 500;
+  background-color: #79c0ff;
   text-align: left;
+}
+ul li {
+  background-color: #000000d7;
+  color: #fff;
+  padding: 10px;
 }
 
 @media screen and (max-width: 500px) {
