@@ -1,9 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 .parent {
-  padding: 10px;
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
+  height: 100vh;
+  border: 1px solid red;
+  overflow: hidden;
 }
 
 .navigation ul{
@@ -16,6 +18,7 @@
 }
 .home {
   font-size: 1em;
+  height: 100%;
   margin-top: 30px;
   text-align: center;
 }
@@ -29,10 +32,13 @@
 
 .card {
   width: 100%;
-  margin: 10px auto;
+  height: 100%;
+  padding: 10px;
+  margin: 0 auto;
   box-sizing: border-box;
-  text-align: center;
-  padding: 5px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
 }
 
 
@@ -43,59 +49,102 @@
 .load.active {
   display: block;
 }
-.user {
-  display: grid;
-  width: 50%;
-  margin: 0 auto;
-  grid-template-columns: repeat(2, 1fr);
-  margin-top: 10px;
-  gap: 10px;
-  border: 1px solid red;
-}
 
-.user img {
-  width: 100px;
-  margin-top: 10px;
-  border-radius: 10%;
-}
-button {
-  margin: 10px auto;
-  text-transform: uppercase;
-  padding: 10px 20px;
+.inputs form {
   width: 50%;
-  display: block;
-}
-.card input {
-  width: 50%;
-  box-sizing: border-box;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid blue;
-  margin: 10px auto;
-  font-family: inherit;
-}
-ul {
-  width: 50%;
-  border: 1px solid red;
-  list-style-type: none;
-  margin: 0 auto;
+  margin: 0 auto 10px auto;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  background-color: #33333300;
+  border: 2px solid #00000026;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  padding: 10px;
+  box-sizing: border-box;
+}
+.inputs input, .inputs button {
+  font-family: inherit;
+  padding: 13px;
+  border: 2px solid #00000064;
   font-weight: 500;
-  background-color: #79c0ff;
+  text-transform: capitalize;
+  border-radius: 5px;
+  box-sizing: border-box;
+  transition: all .3s ease-in-out;
+}
+.inputs input:focus, .inputs input:hover, .inputs button:hover {
+  border: 2px solid #000000a3;
+}
+.inputs button {
+  font-weight: 500;
+  background-color: #000;
+  color: #fff;
+}
+.inputs button:hover {
+  background-color: #fff;
+  color: #000;
+  cursor: pointer;
+}
+
+.search {
+  padding: 13px;
+  background: linear-gradient(135deg, #000000, #468af0);
+  box-sizing: border-box; 
+  width: 50%;
+  border-radius: 10px;
+  margin: 0 auto;
+  display: grid;
+  height: fit-content;
+  max-height: 100%;
+  fill: 1;
+  overflow-y: auto;
+  scrollbar-width: 0;
+  grid-template-columns: repeat(2, 1fr);
+  border: 2px solid #00000026;
+  gap: 10px;
+  opacity: 0;
+  visibility: hidden;
+  scroll-behavior: smooth;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+.search.active {
+  opacity: 1;
+  visibility: visible;
+}
+.results {
+  border: 2px solid #ffffff26;
+  background-color: #33333338;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  padding: 15px;
+  text-transform: capitalize;
+  box-sizing: border-box;
+  border-radius: 10px;
   text-align: left;
 }
-ul li {
-  background-color: #000000d7;
-  color: #fff;
-  padding: 10px;
+.results h1 {
+  font-weight: 600;
+  font-size: 17px;
+  text-transform: uppercase;
+}
+.results p {
+  font-weight: 500;
+  color: #ffffff9f;
+  font-size: 13px;
+  font-family: inherit;
 }
 
-@media screen and (max-width: 500px) {
-
-  .user, ul, .card input, button {
+@media screen and (max-width: 750px) {
+  .inputs form, .search {
     width: 100%;
+  }
+  .card {
+    padding: 10px;
+    margin: 0;
   }
   .user {
     grid-template-columns: 1fr 1fr;
@@ -103,5 +152,20 @@ ul li {
   } 
   ul, .user {
     border: none;
+  }
+}
+@media screen and (max-width: 500px) {
+  .home, .card {
+    margin: 0;
+  }
+  .inputs form {
+    margin: 0 auto 10px auto;
+  }
+  .inputs form, .search {
+    width: 100%;
+  }
+  .search {
+    grid-template-columns: 1fr;
+    gap: 13px;
   }
 }

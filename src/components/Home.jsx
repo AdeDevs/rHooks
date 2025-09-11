@@ -2,62 +2,34 @@ import { useEffect, useMemo, useRef, useState } from "react"
 
 
 export default function HomePage() {
-    const [searchTerm, setSearchTerm] = useState("")
+    const [id, setId] = useState(0)
+    const [name, setName] = useState("")
+    const [age, setAge] = useState("")
+    const [club, setClub] = useState("")
+    const [active, setActive] = useState(false)
+    const [items, setItems] = useState([
+    ])
+    const [searchParam, setSearchParam] = useState("")
     const [searchItem, setSearchItem] = useState("")
-    const [query, setQuery] = useState("")
-    const characters = ["Lelouch", "Kallen", "Nunally", "Lancelot", "Zero", "Todo"]
-    const [items, setItems] = useState([])
-    const [users, setUsers] = useState([])
-    const apiUrl = "https://randomuser.me/api/?results=6"
-    const storeUrl = "https://fakestoreapi.com/products/"
-    async function GetProfile() {
-        try {
-            const res = await fetch(apiUrl)
-            const data = await res.json()
-            // console.log(data.results)
-            const list = data.results
-            setUsers(list)
 
-
-            console.log(list)
-
-        } catch {
-            (e) => {
-                console.log(e)
-            }
-        }
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        const newItem = { name, age, club, id };
+        setItems((prevItems) => [...prevItems, newItem])
+        setName("")
+        setAge("")
+        setClub("")
+        setId(id + 1)
+        setActive(true)
     }
+
     useEffect(() => {
-        GetProfile()
-    }, [])
+        console.log(items)
+    }, [items])
 
-    async function GetStoreInfo() {
-        try {
-            const res = await fetch(storeUrl)
-            const data = await res.json()
-            setItems(data)
-            console.log(data)
-        } catch (e) {
-            console.log(e)
-        }
-    }
-    useEffect(() => {
-        GetStoreInfo()
-    }, [])
-
-    const filterItems = useMemo(() => {
-        return items.filter(item => item.category.toLowerCase().includes(searchItem.toLowerCase()))
-    }, [items, searchItem])
-    
-
-    const exactMatch = useMemo(() => {
-        return characters.filter(char => char.toLowerCase().includes(searchTerm.toLowerCase()))
-    }, [query])
-
-    const handleSearch = () => {
-        setQuery(searchTerm)
-    }
-
+    const handleSearch = useMemo(() => {
+        return items.filter(item => item.name.toLowerCase().includes(searchParam.toLowerCase()))
+    }, [items, searchParam])
 
     return (
         <div className="parent">
@@ -68,44 +40,38 @@ export default function HomePage() {
                     <li>Authors</li>
                 </ul>
             </nav> */}
-            <main>
-                <div className="home">
                     <div className="card">
-                        <h1>Testing out hooks</h1>
-                        <input type="text" value={searchTerm} onChange={(e) => { setSearchTerm(e.target.value) }} placeholder="Enter your search" />
-                        <ul>{exactMatch.map((character) => <li key={character}>{character}</li>)}</ul>
-                        <button onClick={handleSearch}>Search</button>
-                        {/* <ul>
-                            {characters.map((character) => <li key={character}>{character}</li>)}
-                        </ul> */}
-                        <input type="text" placeholder="search items" value={searchItem} onChange={(e) => setSearchItem(e.target.value)} />
-                        <ul>
-                            <p>categories include: women's clothing, men's clothing, electronics</p>
-                        {filterItems.map((item) => (
-                            <li key={item.id}>{item.title}</li>
-                        ))}
-                        </ul>
-                        {/* <div className="user">
-                            {items.map((item) => (
-                                <p key={item.id}>{item.title}</p>
-                            ))}
-                        </div> */}
-                        <div className="user">
-                            {users.map((user) => {
-                                return (
-                                    <div key={user.login.uuid}>
-                                        <img src={user.picture.large} alt={user.name.first} />
-                                        <p>{user.name.first} {user.name.last}</p>
-                                        <a href="#">{user.cell}</a>
-                                    </div>
-                                )
-                            })}
+                        <div className="inputs">
+                            <form onSubmit ={handleSubmit}>
+                            <input type="text" placeholder="Enter Your Name" value={name} onChange={(e) => setName(e.target.value)} required />
+                            <input type="number" placeholder="Enter Your Age" value={age} onChange={(e) => setAge(e.target.value)} required />
+                            <input type="text" placeholder="Enter Your Favourite Club" value={club} onChange={(e) => setClub(e.target.value)} required />
+                            <button >Submit</button>
+                            </form>
                         </div>
-                        <button onClick={GetProfile}>change</button>
+                        <div className={`search ${active ? "active" : ""}`}>
+                        {items.map((item) => {
+                            return (
+                                <div key={item.id} className="results">
+                                    <h1>{item.name}</h1>
+                                    <p>{item.age}</p>
+                                    <p>{item.club}</p>
+                                </div>
+                            )
+                        })}
+                        </div>
+                        {/* <input type="text" placeholder="search" value={searchParam} onChange={(e) => setSearchParam(e.target.value)} />
+                        {handleSearch.map((item) => {
+                            return (
+                                <div key={item.id} className="search">
+                                    <p>{item.name}</p>
+                                    <p>{item.age}</p>
+                                    <p>{item.club}</p>
+                                </div>
+                            )
+                        })} */}
                     </div>
 
-                </div>
-            </main>
         </div>
     )
 }
