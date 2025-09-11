@@ -1,16 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 .parent {
+  background-color: #12121a;
+  color: #fff;
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
   height: 100vh;
   overflow: hidden;
+  box-sizing: border-box;
 }
-.parent > h1 {
+.card > h1 {
   text-align: center;
   width: 95%;
   font-size: 18px;
-  margin: 20px auto 10px auto;
+  margin: 0 auto 10px auto;
   text-transform: capitalize;
   font-weight: 500;
 }
@@ -45,7 +48,7 @@
   box-sizing: border-box;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto auto 1fr;
 }
 
 
@@ -58,7 +61,7 @@
 }
 
 .inputs form {
-  width: 50%;
+  width: 80%;
   margin: 0 auto 10px auto;
   display: flex;
   flex-direction: column;
@@ -70,18 +73,24 @@
   padding: 10px;
   box-sizing: border-box;
 }
-.inputs input, .inputs button {
+.inputs input, .inputs button, .inputs textarea {
   font-family: inherit;
-  padding: 13px;
-  border: 2px solid #00000064;
+  padding: 13px 15px;
+  border: 2px solid #ffffff64;
   font-weight: 500;
   text-transform: capitalize;
+  font-size: 14px;
   border-radius: 5px;
   box-sizing: border-box;
   transition: all .3s ease-in-out;
 }
+.inputs textarea {
+  height: 100px;
+  line-height: 20px;
+  text-transform: none;
+}
 .inputs input:focus, .inputs input:hover, .inputs button:hover {
-  border: 2px solid #000000a3;
+  border: 2px solid #ffffffa3;
 }
 .inputs button {
   font-weight: 500;
@@ -98,12 +107,11 @@
   padding: 13px;
   background: linear-gradient(135deg, #000000, #468af0);
   box-sizing: border-box; 
-  width: 50%;
+  width: 80%;
   border-radius: 10px;
   margin: 0 auto;
   display: grid;
   height: fit-content;
-  max-height: 100%;
   fill: 1;
   overflow-y: auto;
   scrollbar-width: 0;
@@ -133,16 +141,25 @@
   border-radius: 10px;
   text-align: left;
 }
+.results:hover .text {
+  color: #fff;
+}
 .results h1 {
   font-weight: 600;
   font-size: 17px;
   text-transform: uppercase;
 }
-.results p {
+.text {
   font-weight: 500;
   color: #ffffff9f;
   font-size: 13px;
   font-family: inherit;
+  transition: all .3s ease-in-out;
+}
+.date {
+  margin: 10px 0;
+  font-weight: 700;
+  font-size: 11px;
 }
 
 @media screen and (max-width: 750px) {
@@ -161,7 +178,7 @@
     border: none;
   }
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 750px) {
   .home, .card {
     margin: 0;
   }

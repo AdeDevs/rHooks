@@ -7,8 +7,8 @@ export default function HomePage() {
         return storedId ? JSON.parse(storedId) : 0; // start at 0 if none saved
     });
     const [name, setName] = useState("")
-    const [age, setAge] = useState("")
-    const [club, setClub] = useState("")
+    const [date, setDate] = useState("")
+    const [entry, setEntry] = useState("")
     const [active, setActive] = useState(() => {
         const stored = localStorage.getItem("active");
         return stored ? JSON.parse(stored) : false;
@@ -22,11 +22,11 @@ export default function HomePage() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const newItem = { name, age, club, id };
+        const newItem = { name, date, entry, id };
         setItems((prevItems) => [...prevItems, newItem]);
         setName("");
-        setAge("");
-        setClub("");
+        setDate("");
+        setEntry("");
         setId((prevId) => prevId + 1);
         setActive(true);
     };
@@ -40,9 +40,7 @@ export default function HomePage() {
         localStorage.setItem("items", JSON.stringify(items));
         console.log(items);
     }, [items]);
-    useEffect(() => {
-        console.log(items)
-    }, [items])
+
 
     // const handleSearch = useMemo(() => {
     //     return items.filter(item => item.name.toLowerCase().includes(searchParam.toLowerCase()))
@@ -50,7 +48,7 @@ export default function HomePage() {
 
     return (
         <div className="parent">
-            <h1>Bored, Here's a form, please input the appropriate info and click submit</h1>
+            {/* <h1>Bored, Here's a form, please input the appropriate info and click submit</h1> */}
             {/* <nav className="navigation">
                 <ul>
                     <li>Home</li>
@@ -59,12 +57,13 @@ export default function HomePage() {
                 </ul>
             </nav> */}
             <div className="card">
+            <h1>Bored, Here's a form, please input the appropriate info and click submit</h1>
                 <div className="inputs">
                     <form onSubmit={handleSubmit}>
-                        <input type="text" placeholder="Enter Your Name" value={name} onChange={(e) => setName(e.target.value)} required />
-                        <input type="number" placeholder="Enter Your Age" value={age} onChange={(e) => setAge(e.target.value)} required />
-                        <input type="text" placeholder="Enter Your Favourite Club" value={club} onChange={(e) => setClub(e.target.value)} required />
-                        <button >Submit</button>
+                        <input type="text" placeholder="Enter Your Entry Title" value={name} onChange={(e) => setName(e.target.value)} required />
+                        <input type="datetime-local"  value={date} onChange={(e) => setDate(e.target.value)} required />
+                        <textarea type="text" placeholder="Make Your Entry" value={entry} onChange={(e) => setEntry(e.target.value)} required />
+                        <button>Save</button>
                     </form>
                 </div>
                 <div className={`search ${active ? "active" : ""}`}>
@@ -72,8 +71,8 @@ export default function HomePage() {
                         return (
                             <div key={item.id} className="results">
                                 <h1>{item.name}</h1>
-                                <p>{item.age}</p>
-                                <p>{item.club}</p>
+                                <p className="text date">Entry made at {item.date}</p>
+                                <p className="text">{item.entry}</p>
                             </div>
                         )
                     })}
