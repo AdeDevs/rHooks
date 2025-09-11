@@ -57,11 +57,13 @@ export default function HomePage() {
                 </ul>
             </nav> */}
             <div className="card">
-            <h1>Bored, Here's a form, please input the appropriate info and click submit</h1>
+                <h1>Bored, Here's a form, please input the appropriate info and click submit</h1>
                 <div className="inputs">
                     <form onSubmit={handleSubmit}>
-                        <input type="text" placeholder="Enter Your Entry Title" value={name} onChange={(e) => setName(e.target.value)} required />
-                        <input type="datetime-local"  value={date} onChange={(e) => setDate(e.target.value)} required />
+                        <div className="split">
+                            <input className="date-form" type="text" placeholder="Enter Your Entry Title" value={name} onChange={(e) => setName(e.target.value)} required />
+                            <input type="datetime-local" value={date} onChange={(e) => setDate(e.target.value)} required />
+                        </div>
                         <textarea type="text" placeholder="Make Your Entry" value={entry} onChange={(e) => setEntry(e.target.value)} required />
                         <button>Save</button>
                     </form>

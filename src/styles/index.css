@@ -85,6 +85,12 @@
   box-sizing: border-box;
   transition: all .3s ease-in-out;
 }
+.split {
+  display: flex;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 10px;
+}
 .inputs textarea {
   height: 100px;
   line-height: 20px;
@@ -180,6 +186,12 @@
   }
 }
 @media screen and (max-width: 750px) {
+  .split {
+    grid-template-columns: 1fr;
+  }
+  .split input {
+    align-self: flex-end;
+  }
   .home, .card {
     margin: 0;
   }
