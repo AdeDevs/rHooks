@@ -76,6 +76,7 @@
 .inputs input, .inputs button, .inputs textarea {
   font-family: inherit;
   padding: 13px 15px;
+  width: 100%;
   border: 2px solid #ffffff64;
   font-weight: 500;
   text-transform: capitalize;
