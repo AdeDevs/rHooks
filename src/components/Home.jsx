@@ -33,6 +33,7 @@ export default function HomePage() {
 
     return (
         <div className="parent">
+            <h1>Bored, Here's a form, please input the appropriate info and click submit</h1>
             {/* <nav className="navigation">
                 <ul>
                     <li>Home</li>
