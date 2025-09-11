@@ -2,34 +2,51 @@ import { useEffect, useMemo, useRef, useState } from "react"
 
 
 export default function HomePage() {
-    const [id, setId] = useState(0)
+    const [id, setId] = useState(() => {
+        const storedId = localStorage.getItem("id");
+        return storedId ? JSON.parse(storedId) : 0; // start at 0 if none saved
+    });
     const [name, setName] = useState("")
     const [age, setAge] = useState("")
     const [club, setClub] = useState("")
-    const [active, setActive] = useState(false)
-    const [items, setItems] = useState([
-    ])
-    const [searchParam, setSearchParam] = useState("")
-    const [searchItem, setSearchItem] = useState("")
+    const [active, setActive] = useState(() => {
+        const stored = localStorage.getItem("active");
+        return stored ? JSON.parse(stored) : false;
+    });
+    const [items, setItems] = useState(() => {
+        const storedItems = localStorage.getItem("items");
+        return storedItems ? JSON.parse(storedItems) : [];
+    });
+    // const [searchParam, setSearchParam] = useState("")
+    // const [searchItem, setSearchItem] = useState("")
 
     const handleSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         const newItem = { name, age, club, id };
-        setItems((prevItems) => [...prevItems, newItem])
-        setName("")
-        setAge("")
-        setClub("")
-        setId(id + 1)
-        setActive(true)
-    }
-
+        setItems((prevItems) => [...prevItems, newItem]);
+        setName("");
+        setAge("");
+        setClub("");
+        setId((prevId) => prevId + 1);
+        setActive(true);
+    };
+    useEffect(() => {
+        localStorage.setItem("id", JSON.stringify(id));
+    }, [id]);
+    useEffect(() => {
+        localStorage.setItem("active", JSON.stringify(active));
+    }, [active]);
+    useEffect(() => {
+        localStorage.setItem("items", JSON.stringify(items));
+        console.log(items);
+    }, [items]);
     useEffect(() => {
         console.log(items)
     }, [items])
 
-    const handleSearch = useMemo(() => {
-        return items.filter(item => item.name.toLowerCase().includes(searchParam.toLowerCase()))
-    }, [items, searchParam])
+    // const handleSearch = useMemo(() => {
+    //     return items.filter(item => item.name.toLowerCase().includes(searchParam.toLowerCase()))
+    // }, [items, searchParam])
 
     return (
         <div className="parent">
@@ -41,27 +58,27 @@ export default function HomePage() {
                     <li>Authors</li>
                 </ul>
             </nav> */}
-                    <div className="card">
-                        <div className="inputs">
-                            <form onSubmit ={handleSubmit}>
-                            <input type="text" placeholder="Enter Your Name" value={name} onChange={(e) => setName(e.target.value)} required />
-                            <input type="number" placeholder="Enter Your Age" value={age} onChange={(e) => setAge(e.target.value)} required />
-                            <input type="text" placeholder="Enter Your Favourite Club" value={club} onChange={(e) => setClub(e.target.value)} required />
-                            <button >Submit</button>
-                            </form>
-                        </div>
-                        <div className={`search ${active ? "active" : ""}`}>
-                        {items.map((item) => {
-                            return (
-                                <div key={item.id} className="results">
-                                    <h1>{item.name}</h1>
-                                    <p>{item.age}</p>
-                                    <p>{item.club}</p>
-                                </div>
-                            )
-                        })}
-                        </div>
-                        {/* <input type="text" placeholder="search" value={searchParam} onChange={(e) => setSearchParam(e.target.value)} />
+            <div className="card">
+                <div className="inputs">
+                    <form onSubmit={handleSubmit}>
+                        <input type="text" placeholder="Enter Your Name" value={name} onChange={(e) => setName(e.target.value)} required />
+                        <input type="number" placeholder="Enter Your Age" value={age} onChange={(e) => setAge(e.target.value)} required />
+                        <input type="text" placeholder="Enter Your Favourite Club" value={club} onChange={(e) => setClub(e.target.value)} required />
+                        <button >Submit</button>
+                    </form>
+                </div>
+                <div className={`search ${active ? "active" : ""}`}>
+                    {items.map((item, idx) => {
+                        return (
+                            <div key={item.id} className="results">
+                                <h1>{item.name}</h1>
+                                <p>{item.age}</p>
+                                <p>{item.club}</p>
+                            </div>
+                        )
+                    })}
+                </div>
+                {/* <input type="text" placeholder="search" value={searchParam} onChange={(e) => setSearchParam(e.target.value)} />
                         {handleSearch.map((item) => {
                             return (
                                 <div key={item.id} className="search">
@@ -71,7 +88,7 @@ export default function HomePage() {
                                 </div>
                             )
                         })} */}
-                    </div>
+            </div>
 
         </div>
     )

@@ -8,8 +8,9 @@
 }
 .parent > h1 {
   text-align: center;
+  width: 95%;
   font-size: 18px;
-  margin: 20px auto;
+  margin: 20px auto 10px auto;
   text-transform: capitalize;
   font-weight: 500;
 }
