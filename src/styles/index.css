@@ -76,7 +76,7 @@
 
 .forms .toggle {
   position: absolute;
-  right: 0;
+  right: 10px;
   top: 45vh;
 }
 .forms button:hover {
