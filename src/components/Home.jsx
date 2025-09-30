@@ -47,6 +47,10 @@ export default function HomePage() {
     useEffect(() => {
         console.log(filteredDebtors)
     }, [debtors])
+    
+    const deleteDebtor = (id) => {
+        setDebtors((prev) => prev.filter((item) => item.id !== id))
+    }
 
     return (
         <div className={`parent ${theme ? "" : "active"}`}>
@@ -76,6 +80,8 @@ export default function HomePage() {
                                     <h1>{debtor.name}</h1>
                                     <p>{debtor.amount}</p>
                                     <p>{debtor.reason}</p>
+                                    <br />
+                                    <button onClick={(() => deleteDebtor(debtor.id))}>Delete Debtor</button>
                                 </div>
                             )
                         })}
